@@ -4,7 +4,7 @@ import java.util.*
 
 data class CustomerDTO(
     val id: UUID,
-    val firstname: String,
+    val firstName: String,
     val lastName: String,
     val document: String,
     val email: String

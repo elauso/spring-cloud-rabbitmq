@@ -15,5 +15,6 @@ class CustomerCreatedConsumer {
     @Bean("customer-created-consumer")
     fun consume() = Consumer<CustomerCreatedEvent> { customerCreatedEvent ->
         log.debug("m=accept, msg=Consumed event={}", customerCreatedEvent)
+        throw RuntimeException() // Force exception to test dlq
     }
 }

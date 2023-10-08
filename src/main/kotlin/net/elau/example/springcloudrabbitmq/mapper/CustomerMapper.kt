@@ -7,7 +7,7 @@ import net.elau.example.springcloudrabbitmq.web.request.CreateCustomerRequest
 import java.util.*
 
 fun CreateCustomerRequest.toDTO() = CreateCustomerDTO(
-    firstname = firstname,
+    firstName = firstName,
     lastName = lastName,
     document = document,
     email = email
@@ -15,7 +15,7 @@ fun CreateCustomerRequest.toDTO() = CreateCustomerDTO(
 
 fun CreateCustomerDTO.toDTO() = CustomerDTO(
     id = UUID.randomUUID(),
-    firstname = firstname,
+    firstName = firstName,
     lastName = lastName,
     document = document,
     email = email
@@ -23,7 +23,7 @@ fun CreateCustomerDTO.toDTO() = CustomerDTO(
 
 fun CustomerDTO.toEvent() = CustomerCreatedEvent(
     id = id,
-    firstname = firstname,
+    firstName = firstName,
     lastName = lastName,
     document = document,
     email = email
