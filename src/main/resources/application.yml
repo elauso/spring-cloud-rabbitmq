@@ -3,24 +3,48 @@ spring:
     name: 'spring-cloud-rabbitmq'
   main:
     allow-bean-definition-overriding: true
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
   cloud:
     function:
       definition: customer-created-producer;customer-created-consumer
     stream:
+      binders:
+        rabbitAll:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      rabbit:
+        bindings:
+          customer-created-producer-out-0:
+            exchange-type: direct
+            destination: customer-created
+            producer:
+              binding-routing-key: 'customer-created'
+              routing-key-expression: '''customer-created'''
+          customer-created-consumer-in-0:
+            consumer:
+              binding-routing-key: customer-created
+              routing-key-expression: '''customer-created'''
+              dead-letter-routing-key: customer-created.dlq
+              dead-letter-queue-name: customer-created.${spring.application.name}-customer-created-consumer-dlq
+              dead-letter-exchange: customer-created.exchange
+              dlq-dead-letter-exchange: customer-created.exchange
+              dlq-dead-letter-routing-key: customer-created
+              auto-bind-dlq: true
       bindings:
         customer-created-producer-out-0:
           destination: customer-created
+          binder: rabbitAll
         customer-created-consumer-in-0:
           destination: customer-created
-          group: '${spring.application.name}-customer-created-consumer'
+          group: ${spring.application.name}-customer-created-consumer
+          binder: rabbitAll
           consumer:
             max-attempts: 3
-            auto-bind-dlq: true
 logging:
   level:
     org.springframework: INFO
