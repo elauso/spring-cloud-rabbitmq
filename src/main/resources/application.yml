@@ -8,7 +8,7 @@ spring:
       definition: customer-created-producer;customer-created-consumer
     stream:
       binders:
-        rabbitAll:
+        rabbit-binder:
           type: rabbit
           environment:
             spring:
@@ -38,11 +38,11 @@ spring:
       bindings:
         customer-created-producer-out-0:
           destination: customer-created
-          binder: rabbitAll
+          binder: rabbit-binder
         customer-created-consumer-in-0:
           destination: customer-created
           group: ${spring.application.name}-customer-created-consumer
-          binder: rabbitAll
+          binder: rabbit-binder
           consumer:
             max-attempts: 3
 logging:
