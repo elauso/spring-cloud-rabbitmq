@@ -1,0 +1,5 @@
+# Create customer request
+curl -i -H "Content-Type: application/json" http://localhost:8080/customers -d '{"firstname":"test","lastName":"test","document":"1234567890","email":"test@test.com"}'
+
+# Access rabbitmq console
+http://localhost:15672/ # user=guest / password=guest

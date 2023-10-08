@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: 'spring-cloud-rabbitmq'
+  main:
+    allow-bean-definition-overriding: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    function:
+      definition: customer-created-producer; customer-created-consumer
+    stream:
+      bindings:
+        customer-created-producer-out-0:
+          destination: customer-created
+        customer-created-consumer-in-0:
+          destination: customer-created
+
+logging:
+  level:
+    org.springframework: INFO
+    net.elau.example.springcloudrabbitmq: DEBUG
+  pattern.level: '%5p [${spring.application.name:},%mdc{trace_id:-},%mdc{span_id:-}]'
