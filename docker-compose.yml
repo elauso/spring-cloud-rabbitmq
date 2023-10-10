@@ -2,8 +2,9 @@ version: '3'
 
 services:
   rabbitmq:
-    image: rabbitmq:management
-    container_name: rabbitmq
+    build:
+      dockerfile: Dockerfile.rabbitmq_custom
+    container_name: rabbitmq-custom
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
