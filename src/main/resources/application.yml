@@ -45,6 +45,10 @@ spring:
           binder: rabbit-binder
           consumer:
             max-attempts: 3
+            back-off-initial-interval: 5000
+            default-retryable: true
+            retryable-exceptions:
+              net.elau.example.springcloudrabbitmq.exception.InvalidDataException: false
 logging:
   level:
     org.springframework: INFO
