@@ -19,6 +19,7 @@ repositories {
 }
 
 extra["springCloudVersion"] = "2022.0.4"
+extra["kotlinLoggingVersion"] = "2.0.11"
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -27,6 +28,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-amqp")
 	implementation("org.springframework.cloud:spring-cloud-stream")
 	implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
+	implementation("io.github.microutils:kotlin-logging-jvm:${property("kotlinLoggingVersion")}")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.cloud:spring-cloud-stream-test-binder")
